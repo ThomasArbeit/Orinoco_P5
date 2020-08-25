@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">    <link rel="stylesheet" href="../css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <div id="header" class="header">
+            <a href="index.html" class="header__logo"><img src="../img/Image 1.png"></a>
+            <nav class="header__nav">
+                <ul>
+                    <li> <a href="index.html" class="header__link">Accueil</a></li>
+                    <li id="cart"><a href="cart.html" class="header__link">panier <span>0</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="l-container">
+        <section id="cartElement">
+            <h1>Votre Panier</h1>
+            <h2>Vérifiez votre panier</h2>
+            
+            <div class="separation-line"></div>
+            <div id="cartList">
+                
+            </div>
+            <div class="separation-line"></div>
+            <p class="error" id="error"></p>
+            
+        </section>
+    </main>
+    
+    <article class="l-container">
+        <form id="form" class="form">
+            <h2 class="form__title">Vos coordonées</h2>
+            <div class="form__box">
+                <label for="lastName" class="form__label">Votre Nom</label>
+                <input type="text" name="lastName" id="lastName" class="form__input" placeholder="Arbeit">
+                <p class="form__icon form__iconError"><i class="fas fa-exclamation-circle"></i></p>
+                <p class="form__icon form__iconSuccess"><i class="fas fa-check-circle"></i></p>
+                <div class="form__errorMessage"></div>
+            </div>
+            <div class="form__box"> 
+                <label for="firstName" class="form__label">Votre Prénom</label>
+                <input type="text" name="firstName" id="firstName" class="form__input" placeholder="Thomas">
+                <p class="form__icon form__iconError"><i class="fas fa-exclamation-circle"></i></p>
+                <p class="form__icon form__iconSuccess"><i class="fas fa-check-circle"></i></p>
+                <div class="form__errorMessage"></div>
+            </div>
+            <div class="form__box">
+                <label for="eMail" class="form__label">Votre E-mail</label>
+                <input type="email" name="eMail" id="eMail" class="form__input" placeholder="tarbeit@hotmail.fr">
+                <p class="form__icon form__iconError"><i class="fas fa-exclamation-circle"></i></p>
+                <p class="form__icon form__iconSuccess"><i class="fas fa-check-circle"></i></p>
+                <div class="form__errorMessage"></div>
+            </div>
+            <div class="form__box">
+                <label for="address" class="form__label">Votre Adresse</label>
+                <input type="text" name="address" id="address" class="form__input" placeholder="17 rue de la charmille">
+                <p class="form__icon form__iconError"><i class="fas fa-exclamation-circle"></i></p>
+                <p class="form__icon form__iconSuccess"><i class="fas fa-check-circle"></i></p>
+                <div class="form__errorMessage"></div>
+            </div>
+            <div class="form__box">
+                <label for="city" class="form__label">Votre Ville</label>
+                <input type="text" name="city" id="city" class="form__input" placeholder="Strasbourg">
+                <p class="form__icon form__iconError"><i class="fas fa-exclamation-circle"></i></p>
+                <p class="form__icon form__iconSuccess"><i class="fas fa-check-circle"></i></p>
+                <div class="form__errorMessage"></div>
+            </div>
+
+            <button type="submit" class="form__submit">Valider la commande</button>
+        </form>
+    </article>
+    
+    <footer class="footer">
+    </footer>
+
+
+    <script src="../js/function.js"></script>
+    <script src="../js/cart.js"></script>
+    <script src="../js/form.js"></script>
+</body>
+</html>

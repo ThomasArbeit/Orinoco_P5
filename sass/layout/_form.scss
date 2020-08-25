@@ -1,0 +1,68 @@
+.form {
+    border-radius: 9px;
+    padding: 10px;
+    width: 50%;
+
+    &__box{
+        height: 120px;
+        position: relative;
+    }
+
+    &__label{
+        display: block;
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+
+    &__input{
+        display: block;
+        width: 100%;
+        margin-bottom: 7px;
+        padding: 15px;
+        border-radius: 5px;
+        border: 2px solid $clr-secondary;
+
+        &:focus{
+            background-color: $clr-primary;
+        }
+
+        &--error{
+            border-color: red;
+        }
+
+        &--success{
+            border-color: rgb(0, 201, 0);
+        }
+    }
+
+    &__icon{
+        position: absolute;
+        top: 50px;
+        right: 10px;
+        visibility: hidden;
+
+        &--visible{
+            visibility : visible;
+        }
+
+        &Success{
+            color: rgb(0, 201, 0);
+        }
+        
+        &Error{
+            color: red;
+        }
+    }
+
+    &__errorMessage{
+        color: red;
+        font-size: 14px;
+    }
+
+    &__submit{
+        width: 100%;
+        background-color: orange;;
+        color: white;
+        border-radius: 5px;
+    }
+}

@@ -1,0 +1,19 @@
+
+@import "./utils/variable.scss";
+@import "./utils/fonts.scss";
+
+@import "./basics/base.scss";
+
+@import "./components/blocTeddy_accueil";
+@import "./components/separation-line";
+@import "./components/cartArticle";
+@import "./components/buttons";
+
+@import "./layout/header.scss";
+@import "./layout/main_container";
+@import "./layout/productBloc";
+@import "./layout/form";
+@import "./layout/footer";
+
+@import "./pages/accueil";
+@import "./pages/cart";

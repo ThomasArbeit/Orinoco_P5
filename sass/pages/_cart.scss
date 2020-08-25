@@ -1,0 +1,54 @@
+.cartPrice{
+    margin: 20px 0;
+    text-align: end;
+}
+
+.coordonnees{
+    color: black;
+    margin-top: 100px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.form-example{
+    margin-right:1%;
+    position: relative;
+
+    label{
+        display: block;
+        margin-bottom : -10px;
+    }
+
+    input{
+        border-radius: 9px;
+        border: 1px solid #F0F0F0;
+        height: 33px;
+        width: 246px;
+
+        &:focus{
+            background-color: $clr-primary;
+        }
+    }
+
+    span{
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: $clr-secondary;
+    }
+
+    
+}
+
+.form__coordonnees{
+    display: flex;
+    margin-bottom: 16px;
+
+    flex-wrap: wrap;
+}
+
+.error {
+    background-color: rgb(238, 238, 157);
+    color: red;
+    font-size: 16px;
+}
