@@ -5,6 +5,10 @@
 
     justify-content: space-between;
 
+    @include small-tablet{
+        flex-direction: column;
+    }
+
     &__img{
         width: 47%;
         height: 380px;
@@ -16,6 +20,12 @@
         display : flex;
         justify-content: center;
         align-items: center;
+
+        @include small-tablet {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
         img{
             height: 100%;
         }
@@ -23,6 +33,10 @@
 
     &__info{
         width: 47%;
+
+        @include small-tablet {
+            width: 100%;
+        }
     }
 
     &__title{
@@ -66,12 +80,23 @@
     &__addCartAndPrice{
         display : flex;
         align-items: center;
+
+        @include small-desktop{
+            display: block;
+        }
     }
 
     &__price{
         color: $clr-font-h2;
         font-size: 25px;
         margin-right: 40px;
+    }
+
+    &__addToCart{
+        @include small-tablet {
+            width: 100%;
+            margin: 15px 0;
+        }
     }
 
     

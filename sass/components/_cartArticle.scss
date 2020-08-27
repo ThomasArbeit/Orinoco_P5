@@ -10,7 +10,7 @@
 
     width: 100%;
     margin-bottom : 10px;
-    padding: 10px;; 
+    padding: 10px; 
 
     border-radius: 10px;
     border: 2px solid #F0F0F0;
@@ -106,6 +106,14 @@
 
     &__totalPrice{
         margin-left: 20%;
+
+        @include small-tablet{
+            margin: 10px 0 10px 171px ;
+        }
+
+        @include small-mobile{
+            margin-left: 0;
+        }
     }
 
     &__delete{

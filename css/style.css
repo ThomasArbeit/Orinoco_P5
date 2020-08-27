@@ -66,12 +66,25 @@ section {
   width: 250px;
   border-radius: 10px;
   margin-bottom: 30px;
+  margin-right: 20px;
   background-color: white;
   box-shadow: 0px 0px 15px rgba(175, 175, 175, 0.562);
   overflow: hidden;
   cursor: pointer;
   transition: background-color 300ms ease-in-out;
   transition: box-shadow 300ms ease-in-out;
+}
+@media screen and (max-width: 906px) {
+  .blocTeddy {
+    width: 45%;
+    min-width: 230px;
+  }
+}
+@media screen and (max-width: 555px) {
+  .blocTeddy {
+    margin-right: 0px;
+    width: 100%;
+  }
 }
 .blocTeddy__img {
   width: 100%;
@@ -192,6 +205,16 @@ section {
 .cartArticles__totalPrice {
   margin-left: 20%;
 }
+@media screen and (max-width: 722px) {
+  .cartArticles__totalPrice {
+    margin: 10px 0 10px 171px;
+  }
+}
+@media screen and (max-width: 415px) {
+  .cartArticles__totalPrice {
+    margin-left: 0;
+  }
+}
 .cartArticles__delete {
   height: 25px;
   width: 25px;
@@ -227,6 +250,11 @@ button:active {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+@media screen and (max-width: 555px) {
+  .header {
+    flex-direction: column;
+  }
 }
 .header__link {
   display: flex;
@@ -264,6 +292,11 @@ button:active {
   flex-wrap: wrap;
   justify-content: space-between;
 }
+@media screen and (max-width: 722px) {
+  .productBloc {
+    flex-direction: column;
+  }
+}
 .productBloc__img {
   width: 47%;
   height: 380px;
@@ -274,11 +307,22 @@ button:active {
   justify-content: center;
   align-items: center;
 }
+@media screen and (max-width: 722px) {
+  .productBloc__img {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
 .productBloc__img img {
   height: 100%;
 }
 .productBloc__info {
   width: 47%;
+}
+@media screen and (max-width: 722px) {
+  .productBloc__info {
+    width: 100%;
+  }
 }
 .productBloc__title {
   margin-bottom: 17px;
@@ -317,16 +361,27 @@ button:active {
   display: flex;
   align-items: center;
 }
+@media screen and (max-width: 1168px) {
+  .productBloc__addCartAndPrice {
+    display: block;
+  }
+}
 .productBloc__price {
   color: #979797;
   font-size: 25px;
   margin-right: 40px;
 }
+@media screen and (max-width: 722px) {
+  .productBloc__addToCart {
+    width: 100%;
+    margin: 15px 0;
+  }
+}
 
 .form {
   border-radius: 9px;
   padding: 10px;
-  width: 50%;
+  width: 550px;
 }
 .form__box {
   height: 120px;
@@ -388,7 +443,6 @@ button:active {
 
 #liste {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
 }
 

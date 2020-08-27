@@ -8,6 +8,10 @@
     justify-content: space-between;
     align-items: center;
 
+    @include mobile-only {
+        flex-direction: column;
+    }
+
     &__link{
         display: flex;
         color: black;

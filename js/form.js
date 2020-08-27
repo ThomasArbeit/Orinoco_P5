@@ -51,15 +51,11 @@ form.addEventListener('submit', function(e){
                 console.log("l'envoi au serveur n'est pas correct")
             } else {
                 let orderPrice = localStorage.getItem('totalPriceInCart');
-                console.log(localStorage.getItem('totalPriceInCart'));
-                console.log(orderPrice === "0")
                 if(orderPrice === null || orderPrice === "0"){
                     console.log("Il n'existe pas d'objet dans le panier");
                 } else {
                     let order = json;
-                    console.log(order);
                     order.price = orderPrice;
-                    console.log(order);
                     localStorage.clear();
                     localStorage.setItem('order', JSON.stringify(order));
                 }
