@@ -109,6 +109,7 @@ function formCheck(){
     const eMailValue = eMail.value;
     const addressValue = address.value;
     const cityValue = city.value;
+    const regexEmail = /.+@.+\..+/;
 
     if (lastNameValue === ''){
         setErrorFor(lastName, 'Veuillez entrer votre nom');
@@ -124,6 +125,9 @@ function formCheck(){
 
     if (eMailValue === ''){
         setErrorFor(eMail, 'Veuillez entrer votre email');
+    }
+    else if (!regexEmail.test(eMailValue)){
+        setErrorFor(eMail, 'Attention votre adresse est invalide')
     } else {
         setSuccessFor(eMail, '');
     }
