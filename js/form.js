@@ -9,6 +9,12 @@ const address = document.getElementById("address");
 const city = document.getElementById("city");
 const form = document.getElementById("form");
 
+const regexVerification = /./;
+const regexEmail = /.+@.+\..+/;
+
+
+
+
 
 // Ajout d'une écoute d'évenement lors du submit du formulaire
 form.addEventListener('submit', function(e){
@@ -21,7 +27,6 @@ form.addEventListener('submit', function(e){
     // Vérification des champs du formulaire
     formCheck();
 
-
     // Assignation des inputs à l'objet userContact
     let userContact = {
         firstName: document.getElementById("firstName").value,
@@ -31,12 +36,21 @@ form.addEventListener('submit', function(e){
         email: document.getElementById("eMail").value, 
     }
 
+
     // Si cartProducts n'existe pas, ou qu'il est vide, signaler que le panier est vide !
     if (cartProducts === null || Object.keys(cartProducts)[0] === undefined){
         let cartError = document.getElementById("error");
         cartError.textContent = "Attention, votre panier est vide, vous ne pouvez pas valider votre commande !";
-        document.getElementById("cartElement").appendChild(cartError);
+        console.log("Vous n'avez pas de produits dans votre panier")
 
+    // Ou si les champs du formulaires ne sont pas respectés alors signaler que le test des validations n'est pas rempli
+    } else if (!regexEmail.test(eMail.value) 
+        || !regexVerification.test(lastName.value) 
+        || !regexVerification.test(firstName.value)
+        || !regexVerification.test(address.value)
+        || !regexVerification.test(city.value)
+    ){
+        console.log("Il y a une erreur lors du test de validation des inputs")
     // Sinon créer le tableau contenant les _id des objets 
     } else {
         // Initialisation du tableau
@@ -71,31 +85,19 @@ form.addEventListener('submit', function(e){
             console.log(json);
 
             // Depuis l'objet retourné par le backend
-            // Si l'objet est vide, console.log que l'envoi de l'objet allObjectToPost n'est pas correct
-            if (Object.keys(json)[0] === undefined){
-                console.log("l'envoi au serveur n'est pas correct")
-
-            // Sinon assignation du prix total du localStorage a une variable orderPrice
-            } else {
-                let orderPrice = localStorage.getItem('totalPriceInCart');
-                if(orderPrice === null || orderPrice === "0"){
-                    console.log("Il n'existe pas d'objet dans le panier");
-                } else {
-                    let order = json;
-                    order.price = orderPrice;
-                    // Suppression du localStorage pour ne plus avoir de panier après validation
-                    localStorage.clear();
-                    // Ajout de l'objet order dans le localStorage qui contient la réponse du backend ainsi que le prix total
-                    localStorage.setItem('order', JSON.stringify(order));
-                }
-                // Laisser le temps au navigateur d'indiquer que tout est bon, puis rediriger vers la page de remerciement
-                setTimeout(redirection, 2000);
-            }
             
+            let orderPrice = localStorage.getItem('totalPriceInCart');
+            let order = json;
+            order.price = orderPrice;
+            // Suppression du localStorage pour ne plus avoir de panier après validation
+            localStorage.clear();
+            // Ajout de l'objet order dans le localStorage qui contient la réponse du backend ainsi que le prix total
+            localStorage.setItem('order', JSON.stringify(order));
+            
+            // Laisser le temps au navigateur d'indiquer que tout est bon, puis rediriger vers la page de remerciement
+            setTimeout(redirection, 2000);
         }) 
     }
-    
-
 })
 
 
@@ -109,7 +111,7 @@ function formCheck(){
     const eMailValue = eMail.value;
     const addressValue = address.value;
     const cityValue = city.value;
-    const regexEmail = /.+@.+\..+/;
+    
 
     if (lastNameValue === ''){
         setErrorFor(lastName, 'Veuillez entrer votre nom');
@@ -127,6 +129,7 @@ function formCheck(){
         setErrorFor(eMail, 'Veuillez entrer votre email');
     }
     else if (!regexEmail.test(eMailValue)){
+        console.log(eMailValue)
         setErrorFor(eMail, 'Attention votre adresse est invalide')
     } else {
         setSuccessFor(eMail, '');
