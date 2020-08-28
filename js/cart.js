@@ -1,5 +1,9 @@
+/* -------------- JavaScript pour gérer la partie du panier de la page "Panier" ---------------------- */
+
+// Récupération de l'élément "cartList" dans le DOM
 let cartElement = document.getElementById("cartList");
 
+// Récupération des objets dans le localStorage
 let cartProducts = JSON.parse(localStorage.getItem("productsInCart"));
 
 for (let object in cartProducts){
@@ -35,40 +39,48 @@ for (let object in cartProducts){
     cartArticles__productInfos.classList = "cartArticles__productInfos";
     cartArticles.appendChild(cartArticles__productInfos);
 
+    //Création d'un titre h2 contenant le nom de l'ours
     let cartArticles__productName = document.createElement("h2");
     cartArticles__productName.classList = "cartArticles__productName";
     cartArticles__productName.textContent = product.name;
     cartArticles__productInfos.appendChild(cartArticles__productName);
 
+    //Création d'un paragraphe contenant le prix unitaire de l'ours en question
     let cartArticles__unitPrice = document.createElement("p");
     cartArticles__unitPrice.classList = "cartArticles__unitPrice";
     cartArticles__unitPrice.textContent = "Prix unitaire : " + product.price / 100 + ",OO €";
     cartArticles__productInfos.appendChild(cartArticles__unitPrice);
 
+    //Création de la div contenant la quantité et les boutons pour ajouter ou enlever 
     let cartArticles__quantityAndButtons = document.createElement("div");
     cartArticles__quantityAndButtons.classList = "cartArticles__quantityAndButtons";
     cartArticles__productInfos.appendChild(cartArticles__quantityAndButtons);
 
+    //Création d'un paragraphe qui contient la "Quantité : "
     let cartArticles__quantityText = document.createElement("p");
     cartArticles__quantityText.classList = "cartArticles__quantityText";
     cartArticles__quantityText.textContent = "Quantité : ";
     cartArticles__quantityAndButtons.appendChild(cartArticles__quantityText);
 
+    //Création d'un bouton "-" pour enlever 1 à la quantité de l'ours en question
     let cartArticles__quantityMinus = document.createElement("button");
     cartArticles__quantityMinus.classList = "cartArticles__quantityMinus cartArticles__quantityButton";
     cartArticles__quantityMinus.id = product.name + "minus";
     cartArticles__quantityMinus.textContent = "-";
     cartArticles__quantityAndButtons.appendChild(cartArticles__quantityMinus);
 
+    //Création d'un paragraphe contenant la quantité de l'ours en question
     let cartArticles__quantityNumber = document.createElement("p");
     cartArticles__quantityNumber.classList = "cartArticles__quantityNumber";
     cartArticles__quantityNumber.textContent = product.quantity;
     cartArticles__quantityAndButtons.appendChild(cartArticles__quantityNumber);
+    // Si la quantité est inférieure à 2, on fait en sorte qu'on ne puisse plus cliquer sur le bouton (disabled)
     if (product.quantity < 2){
         cartArticles__quantityMinus.disabled = true; 
         cartArticles__quantityMinus.classList = "cartArticles__quantityMinus cartArticles__quantityButton cartArticles__quantityButton--disabled";
     }
 
+    //Création du bouton "+" qui permet d'ajouter 1 à la quantité de l'ours en question
     let cartArticles__quantityPlus = document.createElement("button");
     cartArticles__quantityPlus.classList = "cartArticles__quantityplus cartArticles__quantityButton";
     cartArticles__quantityPlus.id = product.name + "plus";
@@ -85,13 +97,16 @@ for (let object in cartProducts){
 
     /* --------- FONCTIONS POUR AJOUTER OU SUPPRIMER DES ELEMENTS --------- */
 
+    // Récupération du prix total dans le localStorage
     let totalPrice = localStorage.getItem("totalPriceInCart");
     totalPrice = JSON.parse(totalPrice);
 
+    // Fonction qui actualise le prix total d'un encart pour l'objet en question (en fonction de sa quantité)
     function totalPriceUpdate(){
         cartArticles__totalPrice.textContent = "Prix total : " + (cartProducts[object].quantity * cartProducts[object].price /100) + ",OO €";
     };
 
+    // Fonction qui actualise le prix total de tous les ours (en additionnant)
     function cartTotalPriceMinus(){
         let totalPrice = localStorage.getItem("totalPriceInCart");
         totalPrice = JSON.parse(totalPrice);
@@ -100,6 +115,7 @@ for (let object in cartProducts){
         cartPrice.textContent ="Prix total de votre commande : " + localStorage.getItem("totalPriceInCart") + ",00 €";
     }
 
+    // Fonction qui actualise le prix total de tous les ours (lors de la soustraction)
     function cartTotalPriceAdd(){
         let totalPrice = localStorage.getItem("totalPriceInCart");
         totalPrice = JSON.parse(totalPrice);
@@ -108,6 +124,7 @@ for (let object in cartProducts){
         cartPrice.textContent ="Prix total de votre commande : " + localStorage.getItem("totalPriceInCart") + ",00 €";
     }
 
+    // Fonction qui actualise le prix total de tous les ours (lors de la suppression d'un objet peu importe la quantité)
     function cartTotalPriceRemoveItem(){
         let totalPrice = localStorage.getItem("totalPriceInCart");
         totalPrice = JSON.parse(totalPrice);
@@ -116,7 +133,7 @@ for (let object in cartProducts){
         cartPrice.textContent ="Prix total de votre commande : " + localStorage.getItem("totalPriceInCart") + ",00 €";
     }
 
-
+    // Ajout d'une écoute d'évenement lors du clic sur le bouton "poubelle"
     cartArticles__delete.addEventListener('click', function(e){
         cartTotalPriceRemoveItem();
         delete cartProducts[object];
@@ -133,7 +150,7 @@ for (let object in cartProducts){
 
     })
     
-
+    // Ajout d'une écoute d'évenement lors du clic sur le bouton "-"
     cartArticles__quantityMinus.addEventListener('click', function(e){
         cartProducts[object].quantity--;
         cartArticles__quantityNumber.textContent = cartProducts[object].quantity;
@@ -151,6 +168,7 @@ for (let object in cartProducts){
         e.preventDefault();
     })
 
+    // Ajout d'une écoute d'évenement lors du clic sur le bouton "+"
     cartArticles__quantityPlus.addEventListener('click', function(e){
         cartProducts[object].quantity++;
         cartArticles__quantityNumber.textContent = cartProducts[object].quantity;

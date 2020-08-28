@@ -106,36 +106,6 @@ fetch('http://localhost:3000/api/teddies')
           // Création d'une écoute d'évenement on click du bouton addToCart
           let addToCart = document.getElementById("addToCart");
 
-          /*addToCart.addEventListener('click', function(e){
-            let teddyOnPage = teddies[i];
-            let productsInCart = localStorage.getItem('teddiesInCart');
-            productsInCart = JSON.parse(productsInCart);
-
-            if (productsInCart == null){
-              teddyOnPage.quantity = 1;
-              productsInCart = [
-                teddyOnPage
-              ];
-            } else {
-              for (let j = 0; j < productsInCart.length; j++){
-                console.log(productsInCart[j])
-                console.log(j);
-                if (productsInCart[j].name == teddyOnPage.name ){
-                  let objectSearched = productsInCart[j];
-                  console.log(objectSearched.quantity);
-                  objectSearched.quantity++;
-                  break;
-                }
-                else {
-                  
-                }
-              }
-
-            }
-    
-            localStorage.setItem("teddiesInCart", JSON.stringify(productsInCart));
-            console.log(productsInCart);
-          })*/
 
           addToCart.addEventListener('click', function(e){
 
@@ -190,15 +160,3 @@ fetch('http://localhost:3000/api/teddies')
       };
   };
   })
-
-  /*
-  for (let j = 0; j < productsInCart.length; j++){
-    console.log(productsInCart[j].name);
-    console.log(teddyOnPage.name);
-    if (teddyOnPage.name == productsInCart[j].name){
-      console.log(teddyOnPage.name === productsInCart[j].name);
-      productsInCart[j].quantity++;
-    } else {}
-  }
-
-*/
