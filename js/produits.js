@@ -153,7 +153,7 @@ fetch('http://localhost:3000/api/teddies')
             // Attribuer l'objet isIncart au localStorage
             localStorage.setItem("productsInCart", JSON.stringify(isInCart));
 
-            numberOfProductsInCartAdd();
+            numberOfProductsInCartAddorMinus(numberOfProducts++);
             // Eviter que le lien ne fonctionne
             e.preventDefault();
           })

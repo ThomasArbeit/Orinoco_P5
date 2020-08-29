@@ -106,10 +106,9 @@ for (let object in cartProducts){
         cartArticles__totalPrice.textContent = "Prix total : " + (cartProducts[object].quantity * cartProducts[object].price /100) + ",OO €";
     };
 
+    /*
     // Fonction qui actualise le prix total de tous les ours (en additionnant)
     function cartTotalPriceMinus(){
-        let totalPrice = localStorage.getItem("totalPriceInCart");
-        totalPrice = JSON.parse(totalPrice);
         totalPrice = totalPrice - (cartProducts[object].price / 100);
         localStorage.setItem("totalPriceInCart", totalPrice);
         cartPrice.textContent ="Prix total de votre commande : " + localStorage.getItem("totalPriceInCart") + ",00 €";
@@ -117,9 +116,17 @@ for (let object in cartProducts){
 
     // Fonction qui actualise le prix total de tous les ours (lors de la soustraction)
     function cartTotalPriceAdd(){
+        totalPrice = totalPrice + (cartProducts[object].price / 100);
+        localStorage.setItem("totalPriceInCart", totalPrice);
+        cartPrice.textContent ="Prix total de votre commande : " + localStorage.getItem("totalPriceInCart") + ",00 €";
+    }
+    */
+
+    // Fonction qui actualise le prix total du panier (soustraction ou addition)
+    function cartTotalPriceAddOrMinus(param){
         let totalPrice = localStorage.getItem("totalPriceInCart");
         totalPrice = JSON.parse(totalPrice);
-        totalPrice = totalPrice + (cartProducts[object].price / 100);
+        totalPrice = totalPrice + param; 
         localStorage.setItem("totalPriceInCart", totalPrice);
         cartPrice.textContent ="Prix total de votre commande : " + localStorage.getItem("totalPriceInCart") + ",00 €";
     }
@@ -131,6 +138,13 @@ for (let object in cartProducts){
         totalPrice = totalPrice - (cartProducts[object].price / 100) * cartProducts[object].quantity;
         localStorage.setItem("totalPriceInCart", totalPrice);
         cartPrice.textContent ="Prix total de votre commande : " + localStorage.getItem("totalPriceInCart") + ",00 €";
+    }
+
+    // Fonction qui ajoute ou enelve 1 a la quantité du produit
+    function addOrMinusQuantityOfThisProduct(param){
+        param;
+        cartArticles__quantityNumber.textContent = cartProducts[object].quantity;
+        localStorage.setItem("productsInCart", JSON.stringify(cartProducts));
     }
 
     // Ajout d'une écoute d'évenement lors du clic sur le bouton "poubelle"
@@ -152,37 +166,35 @@ for (let object in cartProducts){
     
     // Ajout d'une écoute d'évenement lors du clic sur le bouton "-"
     cartArticles__quantityMinus.addEventListener('click', function(e){
-        cartProducts[object].quantity--;
-        cartArticles__quantityNumber.textContent = cartProducts[object].quantity;
+        addOrMinusQuantityOfThisProduct(cartProducts[object].quantity--);
         totalPriceUpdate();
-        cartTotalPriceMinus();
+        cartTotalPriceAddOrMinus(-(cartProducts[object].price / 100));
 
-        localStorage.setItem("productsInCart", JSON.stringify(cartProducts));
+        
         if (cartProducts[object].quantity == 1){
             cartArticles__quantityMinus.disabled = true;
             cartArticles__quantityMinus.classList = "cartArticles__quantityMinus cartArticles__quantityButton cartArticles__quantityButton--disabled";
         } else {
             cartArticles__quantityMinus.disabled = false;
         }
-        numberOfProductsInCartMinus(); 
+        numberOfProductsInCartAddorMinus(numberOfProducts--); 
         e.preventDefault();
     })
 
     // Ajout d'une écoute d'évenement lors du clic sur le bouton "+"
     cartArticles__quantityPlus.addEventListener('click', function(e){
-        cartProducts[object].quantity++;
-        cartArticles__quantityNumber.textContent = cartProducts[object].quantity;
+        addOrMinusQuantityOfThisProduct(cartProducts[object].quantity++);
         totalPriceUpdate();
-        cartTotalPriceAdd();
+        cartTotalPriceAddOrMinus(+(cartProducts[object].price / 100));
 
-        localStorage.setItem("productsInCart", JSON.stringify(cartProducts));
+        
         if (cartProducts[object].quantity > 1){
             cartArticles__quantityMinus.disabled = false;
             cartArticles__quantityMinus.classList = "cartArticles__quantityMinus cartArticles__quantityButton";
         } else {
             cartArticles__quantityMinus.disabled = true;
         }
-        numberOfProductsInCartAdd();
+        numberOfProductsInCartAddorMinus(numberOfProducts++);
         e.preventDefault();
     })
 };
