@@ -74,6 +74,7 @@ for (let object in cartProducts){
     cartArticles__quantityNumber.classList = "cartArticles__quantityNumber";
     cartArticles__quantityNumber.textContent = product.quantity;
     cartArticles__quantityAndButtons.appendChild(cartArticles__quantityNumber);
+    
     // Si la quantité est inférieure à 2, on fait en sorte qu'on ne puisse plus cliquer sur le bouton (disabled)
     if (product.quantity < 2){
         cartArticles__quantityMinus.disabled = true; 
@@ -106,22 +107,6 @@ for (let object in cartProducts){
         cartArticles__totalPrice.textContent = "Prix total : " + (cartProducts[object].quantity * cartProducts[object].price /100) + ",OO €";
     };
 
-    /*
-    // Fonction qui actualise le prix total de tous les ours (en additionnant)
-    function cartTotalPriceMinus(){
-        totalPrice = totalPrice - (cartProducts[object].price / 100);
-        localStorage.setItem("totalPriceInCart", totalPrice);
-        cartPrice.textContent ="Prix total de votre commande : " + localStorage.getItem("totalPriceInCart") + ",00 €";
-    }
-
-    // Fonction qui actualise le prix total de tous les ours (lors de la soustraction)
-    function cartTotalPriceAdd(){
-        totalPrice = totalPrice + (cartProducts[object].price / 100);
-        localStorage.setItem("totalPriceInCart", totalPrice);
-        cartPrice.textContent ="Prix total de votre commande : " + localStorage.getItem("totalPriceInCart") + ",00 €";
-    }
-    */
-
     // Fonction qui actualise le prix total du panier (soustraction ou addition)
     function cartTotalPriceAddOrMinus(param){
         let totalPrice = localStorage.getItem("totalPriceInCart");
@@ -147,6 +132,19 @@ for (let object in cartProducts){
         localStorage.setItem("productsInCart", JSON.stringify(cartProducts));
     }
 
+    // Fonction qui en fonction de la quantité du produit rend le bouton "-" disabled ou non
+    function disabledOrNot(){
+        if (cartProducts[object].quantity < 2){
+            cartArticles__quantityMinus.disabled = true;
+            cartArticles__quantityMinus.classList = "cartArticles__quantityMinus cartArticles__quantityButton cartArticles__quantityButton--disabled";
+        } else {
+            cartArticles__quantityMinus.disabled = false;
+            cartArticles__quantityMinus.classList = "cartArticles__quantityMinus cartArticles__quantityButton";
+        }
+    }
+
+    /* ------------------------- Ecoute d'évenements -------------------------- */
+
     // Ajout d'une écoute d'évenement lors du clic sur le bouton "poubelle"
     cartArticles__delete.addEventListener('click', function(e){
         cartTotalPriceRemoveItem();
@@ -169,14 +167,7 @@ for (let object in cartProducts){
         addOrMinusQuantityOfThisProduct(cartProducts[object].quantity--);
         totalPriceUpdate();
         cartTotalPriceAddOrMinus(-(cartProducts[object].price / 100));
-
-        
-        if (cartProducts[object].quantity == 1){
-            cartArticles__quantityMinus.disabled = true;
-            cartArticles__quantityMinus.classList = "cartArticles__quantityMinus cartArticles__quantityButton cartArticles__quantityButton--disabled";
-        } else {
-            cartArticles__quantityMinus.disabled = false;
-        }
+        disabledOrNot();
         numberOfProductsInCartAddorMinus(numberOfProducts--); 
         e.preventDefault();
     })
@@ -186,18 +177,13 @@ for (let object in cartProducts){
         addOrMinusQuantityOfThisProduct(cartProducts[object].quantity++);
         totalPriceUpdate();
         cartTotalPriceAddOrMinus(+(cartProducts[object].price / 100));
-
-        
-        if (cartProducts[object].quantity > 1){
-            cartArticles__quantityMinus.disabled = false;
-            cartArticles__quantityMinus.classList = "cartArticles__quantityMinus cartArticles__quantityButton";
-        } else {
-            cartArticles__quantityMinus.disabled = true;
-        }
+        disabledOrNot();
         numberOfProductsInCartAddorMinus(numberOfProducts++);
         e.preventDefault();
     })
 };
+
+
 
 //Création du paragrpahe qui contient le prix total du panier
 let cartPrice = document.createElement("p");
